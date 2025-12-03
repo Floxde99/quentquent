@@ -1,0 +1,69 @@
+/* Modal styles to be 'classe' and neutral for dark/light backgrounds */
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 160ms ease;
+}
+
+.modal-card {
+  width: 420px;
+  max-width: calc(100% - 48px);
+  background: #ffffff;
+  color: #111827;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(2,6,23,0.5);
+  overflow: hidden;
+  transform-origin: center center;
+  animation: popIn 180ms ease;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.modal-title { margin: 0; font-size: 1.1rem; font-weight: 700; }
+
+.modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.modal-body { padding: 16px; }
+.modal-message { margin: 0; font-size: 1rem; line-height: 1.45; }
+
+.modal-footer { padding: 12px 16px; display: flex; justify-content: flex-end; gap: 8px; }
+
+.modal-ok {
+  background: rgb(0, 116, 240);
+  color: white;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.modal-ok:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.08) }
+
+@keyframes popIn {
+  from { transform: scale(0.97); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
