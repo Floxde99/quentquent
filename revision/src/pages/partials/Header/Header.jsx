@@ -26,6 +26,12 @@ const Header = () => {
           >
             Form
           </NavLink>
+          <NavLink
+            to="/film"
+            className={({ isActive }) => `nav-link nav-pill nav-pill-pair ${isActive ? 'active' : ''}`}
+          >
+            Film
+          </NavLink>
         </nav>
       </div>
     </header>

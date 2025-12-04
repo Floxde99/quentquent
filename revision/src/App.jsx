@@ -1,7 +1,10 @@
 import "./App.css";
-import Users from "./components/Users";
-import Header from "./components/Header/Header";
+import "./components/common/common.css";
+import Users from "./pages/Users";
+import Header from "./pages/partials/Header/Header";
 import Form from "./components/Form";
+import Film from "./pages/film";
+import MoovieDetails from "./pages/MoovieDetails";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,7 +17,6 @@ function App() {
   const [users, setUsers] = useState(initialUsers);
 
   const addUser = (user) => {
-    // ensure an id and correct birthday type
     const newUser = {
       id: user.id ?? Date.now(),
       name: user.name,
@@ -32,6 +34,8 @@ function App() {
           <Route path="/" element={<Users users={users} />} />
           <Route path="/users" element={<Users users={users} />} />
           <Route path="/form" element={<Form users={users} addUser={addUser} />} />
+          <Route path="/film" element={<Film />} />
+          <Route path="/film/:id" element={<MoovieDetails />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

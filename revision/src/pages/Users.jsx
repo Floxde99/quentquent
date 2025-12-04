@@ -1,4 +1,4 @@
-import User from "./User";
+import User from "../components/User";
 
 // Users accepts an optional `users` prop; otherwise uses default sample data
 const Users = ({ users } = {}) => {

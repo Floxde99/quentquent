@@ -1,6 +1,6 @@
 import './Modal.css';
 
-const Modal = ({ open, title, message, onClose, children }) => {
+const Modal = ({ open, title, message, onClose, children, className = "", hideFooter = false }) => {
   if (!open) return null;
 
   const handleOverlayClick = (e) => {
@@ -9,7 +9,7 @@ const Modal = ({ open, title, message, onClose, children }) => {
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick} role="dialog" aria-modal="true">
-      <div className="modal-card" role="document">
+      <div className={`modal-card ${className}`} role="document">
         <header className="modal-header">
           <h3 className="modal-title">{title}</h3>
           <button className="modal-close" onClick={onClose} aria-label="Fermer">✕</button>
@@ -18,9 +18,11 @@ const Modal = ({ open, title, message, onClose, children }) => {
           {message && <p className="modal-message">{message}</p>}
           {children}
         </div>
-        <footer className="modal-footer">
-          <button className="modal-ok" onClick={onClose}>OK</button>
-        </footer>
+        {!hideFooter && (
+          <footer className="modal-footer">
+            <button className="modal-ok" onClick={onClose}>OK</button>
+          </footer>
+        )}
       </div>
     </div>
   );
