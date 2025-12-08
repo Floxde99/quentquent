@@ -34,3 +34,24 @@ export const buildHttpError = async (response) => {
   error.url = response.url;
   return error;
 };
+
+export const buildAxiosError = (error) => {
+  if (!error) return new Error("Erreur inconnue");
+  
+  const status = error?.response?.status;
+  const statusText = error?.response?.statusText || "";
+  const data = error?.response?.data;
+  const url = error?.config?.url || error?.request?.responseURL;
+  
+  const message = typeof data === "string"
+    ? data || error.message || `${status} ${statusText}`
+    : data?.status_message || error.message || `${status} ${statusText}`;
+  
+  const enrichedError = new Error(message);
+  enrichedError.status = status;
+  enrichedError.body = data;
+  enrichedError.url = url;
+  enrichedError.originalError = error;
+  
+  return enrichedError;
+};

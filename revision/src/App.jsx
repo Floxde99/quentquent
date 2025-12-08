@@ -7,6 +7,7 @@ import Film from "./pages/film";
 import MoovieDetails from "./pages/MoovieDetails";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
+import Suzon from "./pages/Suzon";
 
 function App() {
   const initialUsers = [
@@ -36,6 +37,7 @@ function App() {
           <Route path="/form" element={<Form users={users} addUser={addUser} />} />
           <Route path="/film" element={<Film />} />
           <Route path="/film/:id" element={<MoovieDetails />} />
+          <Route path="/suzon" element={<Suzon />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

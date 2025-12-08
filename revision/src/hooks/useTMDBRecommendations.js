@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { decodeAccountId, buildHttpError } from "../utils/tmdbUtils";
-
-const TMDB_BASE_URL = "https://api.themoviedb.org/4";
+import axiosClient from "../utils/axiosClient";
+import { decodeAccountId, buildAxiosError } from "../utils/tmdbUtils";
 
 export const useTMDBRecommendations = (token, forcedAccountId, language) => {
   const [movies, setMovies] = useState([]);
@@ -21,22 +20,22 @@ export const useTMDBRecommendations = (token, forcedAccountId, language) => {
     const fetchMovies = async () => {
       setStatus("loading");
       try {
-        const headers = { accept: "application/json", Authorization: `Bearer ${token}` };
+        const configBase = { signal: controller.signal, headers: { Authorization: `Bearer ${token}` } };
         let accountId = forcedAccountId || decodedAccountId;
 
         if (!accountId) {
-          const res = await fetch(`${TMDB_BASE_URL}/account`, { headers, signal: controller.signal });
-          if (!res.ok) throw await buildHttpError(res);
-          accountId = (await res.json())?.id;
+          const res = await axiosClient.get("/account", configBase);
+          accountId = res?.data?.id;
         }
         if (!accountId) throw new Error("Impossible de déterminer ton account_id TMDB.");
         if (cancelled) return;
         setResolvedAccountId(accountId);
-
-        const url = `${TMDB_BASE_URL}/account/${accountId}/movie/recommendations?page=${page}&language=${encodeURIComponent(language)}`;
-        const res = await fetch(url, { headers, signal: controller.signal });
-        if (!res.ok) throw await buildHttpError(res);
-        const data = await res.json();
+        
+        const res = await axiosClient.get(`/account/${accountId}/movie/recommendations`, { 
+          ...configBase, 
+          params: { page, language } 
+        });
+        const data = res?.data;
 
         if (cancelled) return;
         setMovies(Array.isArray(data?.results) ? data.results : []);
@@ -44,9 +43,10 @@ export const useTMDBRecommendations = (token, forcedAccountId, language) => {
         setStatus("success");
       } catch (error) {
         if (cancelled) return;
-        console.error("TMDB error", error);
+        const enrichedError = buildAxiosError(error);
+        console.error("TMDB error", enrichedError);
         setStatus("error");
-        setMessage(error.message || "Erreur inconnue");
+        setMessage(enrichedError.message);
       }
     };
 

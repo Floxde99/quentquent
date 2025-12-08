@@ -1,0 +1,201 @@
+/* Suzon Page - Meal Categories */
+
+/* Main Container */
+.suzon-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  padding: 2rem 1rem;
+}
+
+.suzon-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: slideDown 0.6s ease;
+}
+
+.yolo {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #6366f1 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+/* Status Messages */
+.suzon-loading,
+.suzon-error,
+.suzon-empty {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.suzon-loading {
+  color: #a78bfa;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.suzon-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.suzon-empty {
+  background: rgba(107, 114, 128, 0.1);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+  color: #d1d5db;
+}
+
+/* Categories Grid */
+.suzon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease;
+}
+
+/* Category Card */
+.suzon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  text-decoration: none;
+  color: #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-height: 140px;
+}
+
+.suzon-card:hover {
+  border-color: #6366f1;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.2);
+}
+
+.suzon-card-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.suzon-card:hover .suzon-card-text {
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+/* Top border accent */
+.suzon-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, rgba(139, 92, 246, 0.8));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.suzon-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .suzon-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .yolo {
+    font-size: 2.5rem;
+  }
+
+  .suzon-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .suzon-card {
+    padding: 1.25rem;
+    min-height: 120px;
+  }
+
+  .suzon-card-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .suzon-page {
+    padding: 1rem;
+  }
+
+  .yolo {
+    font-size: 2rem;
+  }
+
+  .suzon-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .suzon-card {
+    padding: 1rem;
+    min-height: 100px;
+  }
+
+  .suzon-card-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
