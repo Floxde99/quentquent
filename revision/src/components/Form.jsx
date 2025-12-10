@@ -2,9 +2,11 @@ import { useState } from "react";
 import Users from "../pages/Users";
 import Modal from "./Modal/Modal";
 
+
 const Form = ({ addUser, users = [] }) => {
   const [formData, setFormData] = useState({ name: "", birthday: "" });
   const [modal, setModal] = useState({ open: false, message: "" });
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
